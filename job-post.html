@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জব পোস্ট ডিজাইন</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #ff6a00;
+            --gradient-orange: linear-gradient(135deg, #ff8c00, #ee0979);
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Header Style */
+        .header {
+            background: var(--gradient-orange);
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+
+        .header h2 { margin: 0; font-size: 24px; }
+        .header p { opacity: 0.9; font-size: 14px; margin-top: 5px; }
+
+        /* Form Styling */
+        .form-body { padding: 25px; }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-group label i {
+            color: var(--primary-orange);
+            margin-right: 5px;
+            width: 20px;
+        }
+
+        .input-group input, 
+        .input-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .input-group input:focus, 
+        .input-group textarea:focus {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 8px rgba(255, 106, 0, 0.2);
+        }
+
+        /* File Upload Styling */
+        .file-upload {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fafafa;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-orange);
+            background: #fff5ed;
+        }
+
+        .file-upload i {
+            font-size: 30px;
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-orange);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(238, 9, 121, 0.3);
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(238, 9, 121, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <i class="fas fa-briefcase" style="font-size: 40px; margin-bottom: 10px;"></i>
+        <h2>নতুন জব পোস্ট করুন</h2>
+        <p>সহজেই আপনার তথ্য পূরণ করে সাবমিট করুন</p>
+    </div>
+
+    <div class="form-body">
+        <div class="input-group">
+            <label><i class="fas fa-heading"></i> জব টাইটেল</label>
+            <input type="text" placeholder="জবের একটি আকর্ষণীয় শিরোনাম লিখুন">
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-align-left"></i> জব ডেসক্রিপশন</label>
+            <textarea rows="4" placeholder="জব সম্পর্কে বিস্তারিত বর্ণনা করুন..."></textarea>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-link"></i> জব লিংক</label>
+            <input type="url" placeholder="https://example.com">
+        </div>
+
+        <div style="display: flex; gap: 15px;">
+            <div class="input-group" style="flex: 1;">
+                <label><i class="fas fa-money-bill-wave"></i> এমাউন্ট (৳)</label>
+                <input type="number" placeholder="0.00">
+            </div>
+            <div class="input-group" style="flex: 1;">
+                <label><i class="fas fa-users"></i> লিমিট</label>
+                <input type="number" placeholder="কতজন">
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label><i class="fas fa-image"></i> জব ফটো</label>
+            <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p style="margin:0; color:#777; font-size:13px;">ক্লিক করে ছবি আপলোড করুন (JPG, PNG)</p>
+                <input type="file" id="fileInput" style="display:none">
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> জব সাবমিট করুন
+        </button>
+    </div>
+</div>
+
+</body>
+</html>

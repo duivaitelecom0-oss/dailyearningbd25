@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইউটিউব ইনকাম - Daily Earning BD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --yt-red: #FF0000; --bg-gray: #f0f2f5; }
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg-gray); margin: 0; padding: 0; }
+        
+        /* হেডার ডিজাইন */
+        .header { background: white; padding: 15px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .header h2 { margin: 0; color: var(--yt-red); font-size: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        /* কাজের নিয়ম (Notice Box) */
+        .rule-box { background: #fff8e1; border-left: 5px solid #ffc107; padding: 15px; margin: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .rule-box h4 { margin: 0 0 5px 0; color: #856404; font-size: 16px; }
+        .rule-box p { margin: 0; font-size: 14px; color: #664d03; line-height: 1.5; }
+
+        /* টাস্ক লিস্ট */
+        .task-list { padding: 0 15px 80px; }
+        .task-card { background: white; border-radius: 16px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: 0.3s; }
+        
+        /* ভিডিও সেকশন */
+        .video-box { position: relative; width: 100%; height: 200px; cursor: pointer; }
+        .video-box img { width: 100%; height: 100%; object-fit: cover; }
+        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 60px; color: rgba(255, 255, 255, 0.9); }
+        .duration { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+
+        /* কার্ড বডি */
+        .card-body { padding: 15px; }
+        .task-title { font-size: 15px; font-weight: 600; color: #1a1a1a; line-height: 1.4; margin-bottom: 10px; }
+        .reward-info { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+        .reward-amount { color: #28a745; font-weight: bold; font-size: 16px; }
+
+        /* বাটন গ্রুপ */
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 14px; transition: 0.2s; }
+        .btn-play { background: var(--yt-red); color: white; }
+        .btn-submit { background: #4caf50; color: white; }
+        .btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2><i class="fab fa-youtube"></i> YouTube Tasks</h2>
+</div>
+
+<div class="rule-box">
+    <h4><i class="fas fa-info-circle"></i> কাজের নিয়ম:</h4>
+    <p>ভিডিওটি কমপক্ষে <b>২ মিনিট</b> দেখুন এবং চ্যানেলটি <b>সাবস্ক্রাইব</b> করে স্ক্রিনশট জমা দিন। নিয়ম না মানলে পেমেন্ট পাবেন না।</p>
+</div>
+
+<div class="task-list">
+    <div class="task-card">
+        <div class="video-box" onclick="startVideo('dQw4w9WgXcQ')">
+            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Thumbnail">
+            <i class="fas fa-play-circle play-btn"></i>
+            <span class="duration">০৩:৪৫</span>
+        </div>
+        <div class="card-body">
+            <div class="task-title">কিভাবে অনলাইন থেকে টাকা ইনকাম করবেন? (New Update)</div>
+            <div class="reward-info">
+                <div class="reward-amount">৳৫.০০ <span>পুরস্কার</span></div>
+                <div style="font-size: 12px; color: #ff5722;"><i class="fas fa-users"></i> ১০০ জন বাকি</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-play" onclick="startVideo('dQw4w9WgXcQ')">
+                    <i class="fas fa-play"></i> ভিডিও দেখুন
+                </button>
+                <button class="btn btn-submit" onclick="submitTask()">
+                    <i class="fas fa-upload"></i> প্রুফ দিন
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function startVideo(videoId) {
+        // ভিডিও লিঙ্কে নিয়ে যাবে
+        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+    }
+
+    function submitTask() {
+        // আপনার হোয়াটসঅ্যাপ নম্বর এখানে দিন
+        const adminWA = "88017XXXXXXXX"; 
+        const msg = `ইউটিউব টাস্ক সাবমিট:%0A-----------------------%0Aআমি ভিডিও দেখেছি এবং সাবস্ক্রাইব করেছি। পেমেন্ট চেক করুন।`;
+        window.open(`https://wa.me/${adminWA}?text=${msg}`, '_blank');
+    }
+</script>
+
+</body>
+</html>

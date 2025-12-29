@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রি-আপলোড - ভিডিও ডাবিং প্রজেক্ট</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* হেডার স্টাইল */
+        .header {
+            background: linear-gradient(135deg, #ff0055, #ff5722);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 { margin: 0; font-size: 22px; }
+        .header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+
+        /* কন্টেন্ট এরিয়া */
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            color: #444;
+        }
+
+        .section-title i { margin-right: 10px; color: #ff0055; }
+
+        /* ভিডিও কার্ড গ্রিড */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 24px;
+            color: white;
+        }
+
+        /* আলাদা আলাদা কালার */
+        .bg-chinese { background: #e63946; }
+        .bg-dubbing { background: #457b9d; }
+        .bg-short { background: #f4a261; }
+        .bg-others { background: #2a9d8f; }
+
+        .video-card h3 {
+            font-size: 15px;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* ব্যাক বাটন */
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            padding: 12px;
+            background: #fff;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>ভিডিও রি-আপলোড সেন্টার</h1>
+    <p>আপনার পছন্দের ক্যাটাগরি নির্বাচন করুন</p>
+</div>
+
+<div class="container">
+    <div class="section-title">
+        <i class="fas fa-play-circle"></i> প্রজেক্ট লিস্ট
+    </div>
+
+    <div class="video-grid">
+        <a href="chinese-dubbing.html" class="video-card">
+            <div class="icon-circle bg-chinese">
+                <i class="fas fa-language"></i>
+            </div>
+            <h3>চাইনিজ ভিডিও ডাবিং</h3>
+        </a>
+
+        <a href="bangla-dubbing.html" class="video-card">
+            <div class="icon-circle bg-dubbing">
+                <i class="fas fa-microphone-alt"></i>
+            </div>
+            <h3>বাংলা ডাবিং ভিডিও</h3>
+        </a>
+
+        <a href="shorts.html" class="video-card">
+            <div class="icon-circle bg-short">
+                <i class="fas fa-film"></i>
+            </div>
+            <h3>শর্ট ভিডিও কাজ</h3>
+        </a>
+
+        <a href="others.html" class="video-card">
+            <div class="icon-circle bg-others">
+                <i class="fas fa-folder-plus"></i>
+            </div>
+            <h3>অন্যান্য ভিডিও</h3>
+        </a>
+    </div>
+
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-chevron-left"></i> আগের পেজে ফিরে যান
+    </a>
+</div>
+
+</body>
+</html>

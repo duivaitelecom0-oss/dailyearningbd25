@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Deal - Daily Earning BD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif; /* বাংলা ফন্ট */
+        }
+
+        body {
+            background-color: #f1f3f6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* হেডার ডিজাইন */
+        .header {
+            width: 100%;
+            background: linear-gradient(90deg, #ff8000, #ff0055);
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        /* কার্ড ডিজাইন */
+        .deal-card {
+            background: white;
+            border-radius: 20px; /* বেশি রাউন্ডেড */
+            padding: 15px 20px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* হালকা শ্যাডো */
+        }
+
+        /* আইকন ডিজাইন */
+        .deal-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .deal-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .text-content {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            line-height: 1.2;
+        }
+
+        /* বাটন ডিজাইন (ছবির মতো) */
+        .deal-btn {
+            background: #2ecc71; /* আপনার ছবির সবুজ রং */
+            color: white;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 95px;
+            transition: 0.3s;
+        }
+
+        .deal-btn i {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .deal-btn:hover {
+            background: #27ae60;
+        }
+
+        /* আইকন কালার কোড */
+        .fb-bg { background-color: #1877F2; }
+        .group-bg { background-color: #9c27b0; }
+        .yt-bg { background-color: #FF0000; }
+        .other-bg { background-color: #607d8b; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        এডমিন ডিল (Admin Deal)
+    </div>
+
+    <div class="container">
+        
+        <div class="deal-card">
+            <div class="deal-left">
+                <div class="deal-icon fb-bg">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="text-content">ফেসবুক পেজ<br>বিক্রয় ডিল</div>
+            </div>
+            <a href="https://wa.me/88017XXXXXXXX" class="deal-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span>ডিল করুন</span>
+            </a>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-left">
+                <div class="deal-icon group-bg">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="text-content">ফেসবুক গ্রুপ<br>বিক্রয় ডিল</div>
+            </div>
+            <a href="https://wa.me/88017XXXXXXXX" class="deal-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span>ডিল করুন</span>
+            </a>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-left">
+                <div class="deal-icon yt-bg">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="text-content">ইউটিউব চ্যানেল<br>বিক্রয় ডিল</div>
+            </div>
+            <a href="https://wa.me/88017XXXXXXXX" class="deal-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span>ডিল করুন</span>
+            </a>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-left">
+                <div class="deal-icon other-bg">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="text-content">অন্যান্য<br>বিক্রয় ডিল</div>
+            </div>
+            <a href="https://wa.me/88017XXXXXXXX" class="deal-btn">
+                <i class="fab fa-whatsapp"></i>
+                <span>ডিল করুন</span>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

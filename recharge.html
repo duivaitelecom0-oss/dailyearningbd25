@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মোবাইল রিচার্জ - Daily Earning BD</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; padding: 20px; }
+        .recharge-card { background: white; width: 100%; max-width: 400px; padding: 25px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-top: 5px solid #e91e63; }
+        h2 { color: #333; text-align: center; margin-bottom: 20px; }
+        label { font-weight: bold; display: block; margin-top: 10px; color: #555; }
+        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        .btn-submit { width: 100%; background: linear-gradient(to right, #ff416c, #ff4b2b); color: white; border: none; padding: 15px; margin-top: 25px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { opacity: 0.9; }
+        .note { font-size: 12px; color: #888; margin-top: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="recharge-card">
+    <h2>মোবাইল রিচার্জ</h2>
+    
+    <label>মোবাইল নম্বর</label>
+    <input type="tel" id="num" placeholder="017XXXXXXXX" maxlength="11">
+
+    <label>অপারেটর সিলেক্ট করুন</label>
+    <select id="op">
+        <option value="Grameenphone">Grameenphone</option>
+        <option value="Robi">Robi</option>
+        <option value="Banglalink">Banglalink</option>
+        <option value="Airtel">Airtel</option>
+        <option value="Teletalk">Teletalk</option>
+    </select>
+
+    <label>প্যাকেজ টাইপ</label>
+    <select id="type">
+        <option value="Prepaid">Prepaid</option>
+        <option value="Postpaid">Postpaid</option>
+    </select>
+
+    <label>টাকার পরিমাণ</label>
+    <input type="number" id="amt" placeholder="টাকা লিখুন">
+
+    <button class="btn-submit" onclick="sendToWhatsApp()">রিচার্জ রিকোয়েস্ট পাঠান</button>
+    
+    <p class="note">রিকোয়েস্ট পাঠানোর পর আমাদের প্রতিনিধি আপনার সাথে যোগাযোগ করবে।</p>
+</div>
+
+<script>
+function sendToWhatsApp() {
+    // আপনার হোয়াটসঅ্যাপ নম্বর এখানে লিখুন (দেশের কোডসহ)
+    const myNumber = "88017XXXXXXXX"; 
+
+    const number = document.getElementById('num').value;
+    const operator = document.getElementById('op').value;
+    const type = document.getElementById('type').value;
+    const amount = document.getElementById('amt').value;
+
+    if(number.length < 11 || amount === "") {
+        alert("দয়া করে সঠিক নম্বর এবং টাকার পরিমাণ লিখুন!");
+        return;
+    }
+
+    // মেসেজ ফরম্যাট তৈরি
+    const message = `নতুন রিচার্জ রিকোয়েস্ট:%0A-----------------------%0Aনম্বর: ${number}%0Aঅপারেটর: ${operator}%0Aটাইপ: ${type}%0Aপরিমাণ: ${amount} টাকা%0A-----------------------%0ADaily Earning BD`;
+
+    // হোয়াটসঅ্যাপে পাঠানোর লিঙ্ক
+    const whatsappUrl = `https://wa.me/${8801300898980}?text=${message}`;
+
+    // নতুন ট্যাবে হোয়াটসঅ্যাপ ওপেন হবে
+    window.open(whatsappUrl, '_blank');
+}
+</script>
+
+</body>
+</html>

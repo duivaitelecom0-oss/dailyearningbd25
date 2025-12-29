@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Earning BD Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-orange: #ff6a00;
+            --secondary-orange: #ee0979;
+            --bg-white: #ffffff;
+            --text-dark: #333;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: var(--text-dark);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #ff6a00, #ee0979);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .menu-btn { cursor: pointer; font-size: 20px; }
+        .logo { font-weight: bold; font-size: 20px; text-align: center; }
+
+        /* Sidebar/Menu Canvas */
+        .sidebar {
+            position: fixed;
+            left: -100%;
+            top: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background: white;
+            z-index: 2000;
+            transition: 0.3s;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .sidebar.active { left: 0; }
+
+        .menu-header {
+            background: linear-gradient(90deg, magenta, green);
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ccc;
+        }
+
+        .profile-section {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .profile-img-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-orange);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+        }
+
+        .profile-img-circle i { font-size: 50px; color: #ccc; }
+
+        .user-name { font-weight: bold; font-size: 18px; }
+        .blue-badge { color: #1da1f2; font-size: 16px; margin-left: 5px; }
+        .status-box { 
+            background: linear-gradient(45deg, #ff6a00, #ee0979);
+            color: white; padding: 5px 15px; border-radius: 5px;
+            display: inline-block; margin-top: 5px; font-size: 12px;
+        }
+
+        .sidebar-links { list-style: none; padding: 10px; }
+        .sidebar-links li { 
+            padding: 12px; border-bottom: 1px solid #f1f1f1;
+            display: flex; align-items: center; cursor: pointer;
+        }
+        .sidebar-links li i { margin-right: 10px; color: var(--primary-orange); }
+
+        /* Main Content Screens */
+        .screen { display: none; padding: 15px; margin-bottom: 70px; }
+        .screen.active { display: block; }
+
+        /* Grid Icons */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .icon-card {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .icon-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #eee;
+            color: #fff;
+        }
+
+        .icon-card span { font-size: 11px; display: block; font-weight: 500; }
+
+        /* Specific Colors */
+        .bg-blue { background: #3498db; }
+        .bg-green { background: #2ecc71; }
+        .bg-red { background: #e74c3c; }
+        .bg-yellow { background: #f1c40f; }
+        .bg-purple { background: #9b59b6; }
+        .bg-navy { background: #34495e; }
+
+        /* Wallet Section Styles */
+        .wallet-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .balance { font-size: 28px; font-weight: bold; color: #2c3e50; }
+        .wallet-option {
+            background: white; margin-top: 10px; padding: 15px;
+            border-radius: 8px; display: flex; justify-content: space-between;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Footer Nav */
+        nav.bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #ff6a00, #ee0979);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .nav-item { color: white; text-align: center; cursor: pointer; text-decoration: none; font-size: 12px; }
+        .nav-item i { display: block; font-size: 20px; margin-bottom: 3px; }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none; z-index: 1500;
+        }
+        .overlay.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <div class="logo">Daily Earning BD</div>
+        <div><i class="fas fa-bell"></i></div>
+    </header>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="menu-header">
+            <span>মেনু</span>
+            <span onclick="toggleMenu()"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="profile-section">
+            <div class="profile-img-circle">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="user-name">Daily Earning BD<i class="fas fa-check-circle blue-badge"></i></div>
+            <div class="status-box">BUSINESS ACCOUNT</div>
+            <p style="font-size: 12px; color: #666;">এফিলিয়েট আইডি: 123456</p>
+            <div style="background: #e0e0e0; height: 10px; border-radius: 5px; margin: 10px 0;">
+                <div style="background: orange; width: 100%; height: 100%; border-radius: 5px;"></div>
+            </div>
+            <span style="font-size: 12px;">Profile Completed 100%</span>
+        </div>
+        <ul class="sidebar-links">
+            <li><i class="fas fa-home"></i> হোম</li>
+            <li><i class="fas fa-user-circle"></i> প্রোফাইল</li>
+            <li><i class="fas fa-bell"></i> নোটিফিকেশন</li>
+            <li><i class="fab fa-whatsapp"></i> হোয়াটসঅ্যাপ গ্রুপ</li>
+            <li><i class="fab fa-telegram"></i> টেলিগ্রাম গ্রুপ</li>
+            <li><i class="fas fa-headset"></i> সাপোর্ট সেন্টার</li>
+            <li><i class="fas fa-sign-out-alt"></i> Log Out</li>
+        </ul>
+    </div>
+<div class="banner-container">
+    <div class="banner-content">
+        <div class="banner-text">
+         
+         
+</style>
+
+ <div id="home" class="screen active">
+    <div class="banner-wrapper">
+        <img src="https://i.imghippo.com/files/fUy4907gM.png" alt="Daily Earning BD Banner" class="responsive-banner">
+    </div>
+
+    <h3 style="font-size: 16px; margin-left: 7px; margin-top: 25px;">
+ 
+ <style>.banner-wrapper {
+    width: 100%;
+    padding: 5px; /* চারপাশ থেকে সামান্য গ্যাপ */
+    margin-bottom: -15px; /* এটি আইকনগুলোকে উপরে টেনে আনবে */
+    box-sizing: border-box;
+}
+
+.responsive-banner {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}</style>
+     
+    <style>
+.banner-wrapper {
+    width: 100%;
+    padding: 2px; /* চারপাশ থেকে একটু ফাঁকা রাখার জন্য */
+    box-sizing: border-box;
+}
+
+.responsive-banner {
+    width: 100%;       /* স্ক্রিনের চওড়া অনুযায়ী ইমেজ বড়-ছোট হবে */
+    height: auto;      /* উচ্চতা অটোমেটিক সামঞ্জস্য করবে */
+    border-radius: 14px; /* কোনাগুলো একটু গোল করার জন্য */
+    display: block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+</style>
+
+ <div class="scrolling-title">
+        <marquee>স্বাগতম Daily Earning BD প্ল্যাটফর্মে! আমাদের সকল সার্ভিস এখন আরও দ্রুত এবং সহজ।</marquee>
+    </div>
+    
+        <h3 style="font-size: 16px; margin-left: 10px;"><i class="fas fa-layer-group"></i> আমাদের প্রজেক্ট সমূহ</h3>
+        <div class="project-grid">
+ <a href="recharge.html" style="text-decoration: none; color: inherit;">
+    <div class="icon-card">
+        <div class="icon-circle bg-blue">
+            <i class="fas fa-mobile-alt"></i>
+        </div>
+        <span>মোবাইল রিচার্জ</span>
+    </div>
+</a>
+
+            <a href="drive.html" style="text-decoration: none; color: inherit;">
+    <div class="icon-card">
+        <div class="icon-circle bg-green">
+            <i class="fas fa-signal"></i>
+        </div>
+        <span>ড্রাইভ প্যাক</span>
+    </div>
+</a>
+
+            <a href="shop.html" style="text-decoration: none; color: inherit;">
+    <div class="icon-card">
+        <div class="icon-circle bg-red">
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+        <span>অনলাইন শপ</span>
+    </div>
+</a>
+                    <a href="graphics.html" style="text-decoration: none; color: inherit;">
+          <div class="icon-card">
+    <div class="icon-circle bg-yellow">
+        <i class="fas fa-palette"></i>
+    </div>
+    <span>গ্রাফিক্স ডিজাইন</spa>
+</div>
+</a>
+
+ <a href="admindeal.html" style="text-decoration: none; color: inherit;">
+            <div class="icon-card"><div class="icon-circle bg-purple"><i class="fas fa-handshake"></i></div><span>এডমিন ডিল</span></div>
+            </a>
+            <a href="facebook.html" style="text-decoration: none; color: inherit;">
+    <div class="icon-card">
+        <div class="icon-circle bg-blue">
+            <i class="fab fa-facebook-f"></i>
+        </div>
+        <span>ফেসবুক ইনকাম</span>
+    </div>
+</a>
+                <a href="youtube.html" style="text-decoration: none; color: inherit;">
+            <div class="icon-card"><div class="icon-circle bg-red"><i class="fab fa-youtube"></i></div><span>ইউটিউব ইনকাম</span></div>
+            </a>
+      <a href="re-upload.html" style="text-decoration: none; color: inherit;">
+    <div class="icon-card">
+        <div class="icon-circle bg-green">
+            <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <span>রি-আপলোড</span>
+    </div>
+</a>
+
+            
+            <div class="icon-card"><div class="icon-circle bg-purple"><i class="fas fa-tasks"></i></div><span>মাইক্রো জব</span></div>
+            <a href="job-post.html" style="text-decoration: none; color: inherit;">
+            <div class="icon-card"><div class="icon-circle bg-purple"><i class="fas fa-briefcase"></i></div><span>জব পোস্ট</span></div>
+            </a>
+            <div class="icon-card"><div class="icon-circle bg-blue"><i class="fas fa-graduation-cap"></i></div><span>ফ্রিল্যান্সিং স্কিল</span></div>
+            <div class="icon-card">
+    <div class="icon-circle bg-green">
+        <i class="fas fa-user-cog"></i>
+    </div>
+    <span>একাউন্ট সেটআপ</span>
+</div>
+        </div>
+    </div>
+
+    <div id="wallet" class="screen">
+        <div class="wallet-card">
+            <p>বর্তমান ব্যালেন্স</p>
+            <div class="balance">৳ 10,000.75</div>
+        </div>
+        <div class="wallet-option"><span><i class="fas fa-history"></i> ইনকাম হিস্ট্রি দেখুন</span> <i class="fas fa-chevron-right"></i></div>
+        <div class="wallet-option"><span><i class="fas fa-wallet"></i> ভাউচার ব্যালেন্স</span> <i class="fas fa-chevron-right"></i></div>
+        <div class="wallet-option"><span><i class="fas fa-credit-card"></i> পেমেন্ট মেথড এড করুন</span><i class="fas fa-chevron-right"></i></div>
+        
+        <div id="payment-screen" class="screen" style="display: none; padding: 15px;">
+    <div class="card payment-card p-4 mx-auto" style="max-width: 400px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: white;">
+        <div class="text-center mb-4">
+            <span class="header-title" style="font-weight: bold; font-size: 1.2rem; color: #333;">
+                <i class="fas fa-credit-card" style="color: #ff6600;"></i> নতুন পেমেন্ট মেথড
+            </span>
+        </div>
+
+        <form id="paymentForm">
+            <label class="form-label">মেথড সিলেক্ট করুন</label>
+            <select class="form-select mb-3" id="method" required>
+                <option value="" selected disabled>-- বেছে নিন --</option>
+                <option value="বিকাশ">বিকাশ (bKash)</option>
+                <option value="নগদ">নগদ (Nagad)</option>
+            </select>
+
+            <label class="form-label">পেমেন্ট নাম্বার</label>
+            <input type="tel" class="form-control mb-3" id="number" placeholder="১১ সংখ্যার নাম্বার দিন" maxlength="11" required>
+
+            <label class="form-label">টাইপ</label>
+            <select class="form-select mb-3" id="type" required>
+                <option value="" selected disabled>-- সিলেক্ট --</option>
+                <option value="পার্সোনাল">পার্সোনাল</option>
+                <option value="স্টুডেন্ট">স্টুডেন্ট</option>
+            </select>
+
+            <button type="submit" class="btn-orange w-100 mt-3" style="background: #ff6600; color: white; border-radius: 25px; padding: 10px; border: none; font-weight: bold;">
+                <i class="fas fa-save me-2"></i> সেভ করুন
+            </button>
+            
+            <button type="button" onclick="hidePaymentForm()" class="btn btn-link w-100 mt-2 text-decoration-none text-muted">ফিরে যান</button>
+        </form>
+    </div>
+</div>
+ 
+        <div class="wallet-option" style="background: #fff5f0;"><span><i class="fas fa-money-bill-wave"></i> ব্যালেন্স উত্তোলন করুন</span> <i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <div id="network" class="screen">
+    <style>
+        .network-header-box {
+            background: linear-gradient(135deg, #ff6a00, #ee0979);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(238, 9, 121, 0.2);
+        }
+
+        .referral-list {
+            max-height: 450px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .channel-item {
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: 0.3s;
+        }
+
+        .channel-item:hover { border-color: #ff6a00; background: #fffaf8; }
+
+        .channel-left { display: flex; align-items: center; gap: 12px; }
+
+        .channel-icon-box {
+            width: 40px; height: 40px; 
+            background: #fff0e6; color: #ff6a00;
+            border-radius: 12px; display: flex;
+            align-items: center; justify-content: center;
+            font-weight: bold; font-size: 16px;
+        }
+
+        .count-badge {
+            background: #f8f9fa; color: #666;
+            padding: 5px 12px; border-radius: 10px;
+            font-size: 12px; font-weight: 600;
+            border: 1px solid #eee;
+        }
+
+        /* Modal & Member List */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: none;
+            justify-content: center; align-items: center; z-index: 3000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-box {
+            background: white; width: 90%; max-width: 380px;
+            border-radius: 25px; overflow: hidden; animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .member-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px; border-bottom: 1px solid #f8f8f8;
+        }
+
+        .status-dot {
+            height: 8px; width: 8px; border-radius: 50%;
+            display: inline-block; margin-right: 5px;
+        }
+        .online { background-color: #2ecc71; box-shadow: 0 0 5px #2ecc71; }
+        .offline { background-color: #bdc3c7; }
+
+        .contact-btn {
+            width: 35px; height: 35px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 16px;
+        }
+    </style>
+
+    <div class="network-header-box">
+        <h3><i class="fas fa-sitemap"></i> আমার চ্যানেল নেটওয়ার্ক</h3>
+        <p>সদস্যদের অনলাইন স্ট্যাটাস ও যোগাযোগ</p>
+    </div>
+
+    <div class="referral-list">
+        <script>
+            // ডেমো ডাটা হিসেবে চ্যানেল লিস্ট তৈরি
+            const channels = [
+                { id: 1, count: 123 }, { id: 2, count: 9 }, { id: 3, count: 0 },
+                { id: 4, count: 0 }, { id: 5, count: 0 }, { id: 6, count: 0 },
+                { id: 7, count: 0 }, { id: 8, count: 0 }, { id: 9, count: 0 },
+                { id: 10, count: 0 }
+            ];
+
+            channels.forEach(ch => {
+                document.write(`
+                    <div class="channel-item" onclick="openMemberModal('চ্যানেল ${ch.id}')">
+                        <div class="channel-left">
+                            <div class="channel-icon-box">${ch.id}</div>
+                            <span style="font-weight:600; color:#444;">চ্যানেল ${ch.id} গ্রাহক</span>
+                        </div>
+                        <div class="count-badge">মোট: ${ch.count}</div>
+                    </div>
+                `);
+            });
+        </script>
+    </div>
+
+    <div class="modal-overlay" id="memberModal" onclick="closeMemberModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header" style="padding:15px; background:#f8f9fa; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">
+                <span id="modalTitle" style="font-weight:bold;">সদস্য তালিকা</span>
+                <i class="fas fa-times" onclick="closeMemberModal()" style="color:red; cursor:pointer;"></i>
+            </div>
+            <div id="memberListData" style="max-height: 350px; overflow-y: auto;">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // অনলাইন এবং অফলাইন মেম্বারদের ডেমো ডাটা
+        const membersData = [
+            { name: "রাকিব হাসান", status: "online", phone: "01700000000" },
+            { name: "সুমন আহমেদ", status: "offline", phone: "01800000000" },
+            { name: "জসিম উদ্দিন", status: "online", phone: "01900000000" },
+            { name: "মেহেদী হাসান", status: "offline", phone: "01600000000" }
+        ];
+
+        function openMemberModal(name) {
+            document.getElementById('modalTitle').innerText = name + " এর সদস্য";
+            const list = document.getElementById('memberListData');
+            list.innerHTML = "";
+
+            membersData.forEach(m => {
+                list.innerHTML += `
+                    <div class="member-item">
+                        <div>
+                            <span class="status-dot ${m.status}"></span>
+                            <span style="font-size:14px; font-weight:500;">${m.name}</span>
+                            <div style="font-size:10px; color:#999; margin-left:13px;">${m.status === 'online' ? 'সক্রিয়' : 'নিষ্ক্রিয়'}</div>
+                        </div>
+                        <div style="display:flex; gap:10px;">
+                            <a href="tel:${m.phone}" class="contact-btn" style="background:#e8f5e9; color:#2e7d32;"><i class="fas fa-phone-alt"></i></a>
+                            <a href="https://wa.me/88${m.phone}" class="contact-btn" style="background:#e1f5fe; color:#0288d1;"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('memberModal').style.display = 'flex';
+        }
+
+        function closeMemberModal() {
+            document.getElementById('memberModal').style.display = 'none';
+        }
+    </script>
+</div>্
+
+
+    <div id="courses" class="screen">
+        <div class="wallet-card" style="margin-bottom: 10px; background: #fff;">
+            <h3>Daily Earning BD কোর্স</h3>
+            <p>ভিডিও দেখে শিখুন এবং আয় শুরু করুন</p>
+        </div>
+        <div class="wallet-option"><i class="fab fa-youtube" style="color: red; font-size: 24px;"></i> Section 01: Introduction <i class="fas fa-play-circle"></i></div>
+        <div class="wallet-option"><i class="fab fa-youtube" style="color: red; font-size: 24px;"></i> Section 02: Advanced Marketing <i class="fas fa-play-circle"></i></div>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item" onclick="showScreen('home')"><i class="fas fa-home"></i>হোম</div>
+        <div class="nav-item" onclick="showScreen('courses')"><i class="fas fa-play-circle"></i>কোর্স</div>
+        <div class="nav-item" onclick="showScreen('wallet')"><i class="fas fa-wallet"></i>ওয়ালেট</div>
+        <div class="nav-item" onclick="showScreen('network')"><i class="fas fa-users"></i>নেটওয়ার্ক</div>
+    </nav>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function showScreen(screenId) {
+            // Hide all screens
+            const screens = document.querySelectorAll('.screen');
+            screens.forEach(screen => screen.classList.remove('active'));
+            
+            // Show the selected screen
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

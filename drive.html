@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ড্রাইভ প্যাক - Daily Earning BD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+        .header { background: linear-gradient(45deg, #e91e63, #673ab7); color: white; padding: 20px; text-align: center; border-radius: 0 0 25px 25px; }
+        
+        /* ট্যাব বাটন স্টাইল */
+        .tab-container { display: flex; justify-content: space-around; background: white; padding: 10px; margin: 15px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .tab-btn { border: none; background: none; padding: 10px; cursor: pointer; font-weight: bold; color: #555; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
+        .tab-btn i { font-size: 20px; margin-bottom: 5px; }
+        .tab-btn.active { color: #e91e63; border-bottom: 2px solid #e91e63; }
+
+        /* অফার লিস্ট */
+        .offer-section { display: none; padding: 15px; }
+        .offer-section.active { display: block; }
+        
+        .offer-card { background: white; border-radius: 15px; padding: 15px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .offer-info h4 { margin: 0; color: #333; }
+        .offer-info p { margin: 5px 0 0; font-size: 13px; color: #777; }
+        
+        .price-tag { text-align: right; }
+        .price { display: block; color: #e91e63; font-size: 18px; font-weight: bold; }
+        .buy-now { background: #28a745; color: white; border: none; padding: 5px 12px; border-radius: 5px; margin-top: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h3>ড্রাইভ অফার সমূহ</h3>
+</div>
+
+<div class="tab-container">
+    <button class="tab-btn active" onclick="showOffers('gp')"><i class="fas fa-th-large"></i>GP</button>
+    <button class="tab-btn" onclick="showOffers('robi')"><i class="fas fa-th-large"></i>Robi</button>
+    <button class="tab-btn" onclick="showOffers('bl')"><i class="fas fa-th-large"></i>BL</button>
+    <button class="tab-btn" onclick="showOffers('airtel')"><i class="fas fa-th-large"></i>Airtel</button>
+</div>
+
+<div id="gp" class="offer-section active">
+    <div class="offer-card">
+        <div class="offer-info">
+            <h4>GP 30GB + 700 Min</h4>
+            <p>মেয়াদ: ৩০ দিন | অল বিডি</p>
+        </div>
+        <div class="price-tag">
+            <span class="price">৳৩৯৯</span>
+            <button class="buy-now" onclick="order('GP 30GB+700Min', '399')">কিনুন</button>
+        </div>
+    </div>
+</div>
+
+<div id="robi" class="offer-section">
+    <div class="offer-card">
+        <div class="offer-info">
+            <h4>Robi 50GB Internet</h4>
+            <p>মেয়াদ: ৩০ দিন | ফ্যামিলি</p>
+        </div>
+        <div class="price-tag">
+            <span class="price">৳৩৭০</span>
+            <button class="buy-now" onclick="order('Robi 50GB', '370')">কিনুন</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showOffers(operatorId) {
+        // সব সেকশন হাইড করা
+        document.querySelectorAll('.offer-section').forEach(section => section.classList.remove('active'));
+        // সব বাটন থেকে একটিভ ক্লাস সরানো
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // সিলেক্টেড সেকশন শো করা
+        document.getElementById(operatorId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    function order(name, price) {
+        const phone = "88017XXXXXXXX"; // আপনার নম্বর দিন
+        const text = `ড্রাইভ অর্ডার:%0Aঅফার: ${name}%0Aমূল্য: ${price} টাকা`;
+        window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
