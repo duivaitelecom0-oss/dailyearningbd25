@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphics Design Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-title {
+            text-align: center;
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #ff0055;
+            padding-bottom: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .item-label {
+            font-size: 13px;
+            color: #444;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        /* আইকন কালার কোডসমূহ */
+        .bg-blue { background-color: #3498db; }
+        .bg-red { background-color: #e74c3c; }
+        .bg-yellow { background-color: #f1c40f; }
+        .bg-purple { background-color: #9b59b6; }
+        .bg-green { background-color: #2ecc71; }
+        .bg-orange { background-color: #e67e22; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="header-title">গ্রাফিক্স ডিজাইন সার্ভিস</h2>
+    
+    <div class="grid-container">
+        <a href="#" class="grid-item">
+            <div class="icon-circle bg-blue">
+                <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="item-label">ফেসবুক কভার ডিজাইন</div>
+        </a>
+
+        <a href="#" class="grid-item">
+            <div class="icon-circle bg-red">
+                <i class="fab fa-youtube"></i>
+            </div>
+            <div class="item-label">ইউটিউব ব্যানার ডিজাইন</div>
+        </a>
+
+        <a href="#" class="grid-item">
+            <div class="icon-circle bg-yellow">
+                <i class="fas fa-image"></i>
+            </div>
+            <div class="item-label">ফেসবুক থাম্বনেল</div>
+        </a>
+
+        <a href="#" class="grid-item">
+            <div class="icon-circle bg-purple">
+                <i class="fas fa-play-circle"></i>
+            </div>
+            <div class="item-label">ইউটিউব থাম্বনেল</div>
+        </a>
+
+        <a href="#" class="grid-item">
+            <div class="icon-circle bg-green">
+                <i class="fas fa-pen-nib"></i>
+            </div>
+            <div class="item-label">লোগো ডিজাইন</div>
+        </a>
+
+        <a href="#" class="grid-item">
+            <div class="icon-circle bg-orange">
+                <i class="fas fa-palette"></i>
+            </div>
+            <div class="item-label">পোস্টার ডিজাইন</div>
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
